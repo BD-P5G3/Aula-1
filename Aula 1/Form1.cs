@@ -32,8 +32,11 @@ namespace Aula_1
                 CN.Close();
         }
 
-        private string getTableContent(SqlConnection CN)
+        private string getTableContent(string dbServer, string dbName, string userName, string userPass)
         {
+            SqlConnection CN = new SqlConnection("Data Source = " + dbServer + " ;" + "Initial Catalog = " + dbName +
+                                                       "; uid = " + userName + ";" + "password = " + userPass);
+
             string str = "";
 
             try
@@ -72,7 +75,8 @@ namespace Aula_1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            string content = getTableContent(this.textBox1.Text, this.textBox2.Text, this.textBox2.Text, this.textBox3.Text);
+            MessageBox.Show(content, "Table content", MessageBoxButtons.OK);
         }
     }
 }
